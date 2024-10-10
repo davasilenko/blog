@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BlogApp</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!-- Подключаем стили Bootstrap через CDN -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Подключаем ваши собственные стили (если будут) -->
+</head>
+
+<body>
+<!-- Навигационная панель -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="<%= root_path %>">BlogApp</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <% if current_user %>
+        <li class="nav-item">
+          <span class="navbar-text">Привет, <%= current_user.username %></span>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Выход', logout_path, class: 'nav-link' %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to 'Регистрация', signup_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Вход', login_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<!-- Основной контент -->
+<div class="container mt-4">
+  <% if notice %>
+    <div class="alert alert-success"><%= notice %></div>
+  <% end %>
+  <% if alert %>
+    <div class="alert alert-danger"><%= alert %></div>
+  <% end %>
+
+  <%= yield %>
+</div>
+
+<!-- Подключаем JavaScript Bootstrap и зависимости через CDN -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Ваш собственный JavaScript код -->
+<script>
+    // Здесь вы можете добавить свой JavaScript код
+</script>
+</body>
+</html>
